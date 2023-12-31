@@ -70,7 +70,16 @@ plt.show()
 #We will use CVX and its Python implementation (cvxpy) with a mixed integer optimization
 # approach as our problem is restricted by the boolean values our $x$ variables can take, 
 #created for convex optimization; itself isn't a solver, it is a modeling framework
+
+
+
+
 import cvxpy as cp
+
+
+
+
+
 import numpy 
 
 # Our solution variable
@@ -354,7 +363,6 @@ print(data1['time'].mean())
 print(data1['time'].std())
 print_result(result)
 
-ansatz = g2(6,1)
 #ansatz = TwoLocal(num_assets, "ry", "cz", reps=6, entanglement="full")
 
 cobyla = COBYLA()
