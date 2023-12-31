@@ -108,7 +108,7 @@ with open('cvxpy6.csv', 'w', newline='') as file:
     writer.writerow(field)
     while i<1000:
         i = i + 1
-        start = time.process_time()
+        start = time.process_timey()
         theta.value = 0.03 # This is related to the risk penalty lagrangian
         prob.solve(solver='ECOS_BB')
         end = time.process_time()
