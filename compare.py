@@ -5,9 +5,9 @@ import data, po, model
 import ast, pandas as pd
 from qsee.core.ansatz import Wchain_zxz
 
-num_assets = input("Enter number of assets: ")
+num_assets = int(input("Enter number of assets: "))
 for i in range(100):    
-
+    print(i)
     mu, sigma, asset_list = data.get_mu_sigma('asset.csv', num_assets)
     qp = po.to_po(mu, sigma, num_assets = num_assets, q = 0.5)
     resultNumpy = model.numpy(qp)
