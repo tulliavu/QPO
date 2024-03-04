@@ -1,12 +1,8 @@
 import pandas as pd
 import numpy as np
-def get_mu_sigma(file_name, num_assets):
+
+def get_mu_sigma_specific(file_name, asset_list):
     data = pd.read_csv(file_name)
-    # Unique asset list
-    asset_list = data["Asset"].unique()
-    np.random.shuffle(asset_list)
-    asset_list = asset_list[:num_assets]
-    #expected return
     exp_ret = {}
     return_list = []
     for asset in asset_list:
@@ -22,3 +18,13 @@ def get_mu_sigma(file_name, num_assets):
     # Compute covariance between returns
     sigma = np.cov((return_list))
     return mu, sigma, asset_list
+
+
+
+def get_mu_sigma(file_name, num_assets):
+    data = pd.read_csv(file_name)
+    # Unique asset list
+    asset_list = data["Asset"].unique()
+    np.random.shuffle(asset_list)
+    asset_list = asset_list[:num_assets]
+    return get_mu_sigma_specific(file_name, asset_list)
