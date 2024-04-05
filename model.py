@@ -8,14 +8,24 @@ from qiskit.primitives import Sampler
 import po, numpy as np, qiskit
 from qsee.core.ansatz import Wchain_zxz
 
+def padding2(x):
+    if not np.log2(len(x)).is_integer():
+        next_power_of_2 = 2**np.ceil(np.log2(len(x)))
+        num_zeros = int(next_power_of_2 - len(x))
+        x = np.pad(x, (0, num_zeros))
+    return np.array(x)
 def qpo(mu, sigma):
     num_assets = len(mu)
     qp = po.to_po(mu, sigma, num_assets = num_assets, q = 0.5)
     resultVQE = numpy(qp)
     x = resultVQE.x.astype(int).tolist()
+    # If len(x) is not power of 2, then add zeros to x
+    x = padding2(x)
     x_k = np.linalg.norm(x)
+    mu = padding2(mu)
     mu_k = np.linalg.norm(mu)
-    num_qubit_assets = int(np.log2(num_assets))
+    print(x)
+    num_qubit_assets = int(np.log2(x.shape[0]))
     qc1 = qiskit.QuantumCircuit(num_qubit_assets)
     qc1.prepare_state(x/x_k)
     qc2 = qiskit.QuantumCircuit(num_qubit_assets)
