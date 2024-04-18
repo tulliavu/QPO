@@ -22,4 +22,4 @@ def hamming(vector1, vector2):
         if bit1 != bit2:
             distance += 1
     
-    return distance
+    return distance/len(vector1)
