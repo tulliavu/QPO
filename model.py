@@ -24,7 +24,6 @@ def qpo(mu, sigma):
     x_k = np.linalg.norm(x)
     mu = padding2(mu)
     mu_k = np.linalg.norm(mu)
-    print(x)
     num_qubit_assets = int(np.log2(x.shape[0]))
     qc1 = qiskit.QuantumCircuit(num_qubit_assets)
     qc1.prepare_state(x/x_k)
